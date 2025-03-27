@@ -70,7 +70,7 @@ def main():
     pred_proba = trained_model.predict(test_x)
 
     # Return necessary data for plotting
-    return df, test_x, test_y, pred_proba, history
+    return df, train_x, test_x, test_y, pred_proba, history
 
 if __name__ == "__main__":
     main()

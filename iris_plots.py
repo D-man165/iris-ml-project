@@ -2,7 +2,7 @@ from iris_nn import *
 import matplotlib.pyplot as plt
 import pandas as pd
 
-df, test_x, test_y, pred_proba, history = main()
+df, train_x, test_x, test_y, pred_proba, history = main()
 
 # temporary test for 1st category
 temp_test_y1 = test_y.iloc[:,0]
@@ -58,16 +58,19 @@ ax[0,1].plot(history.history['val_loss'],'r',label='val_loss')
 ax[0,1].set(title='training loss', xlabel='epoch', ylabel='loss')
 ax[0,1].legend(['train', 'test'], loc='upper right')
 
+# first category
 ax[1,0].plot(ns_fpr1, ns_tpr1, linestyle='--', label='No Skill')
 ax[1,0].plot(lr_fpr1, lr_tpr1, marker='.', label='Logistic')
 ax[1,0].set(title='roc: category #1', xlabel='fpr', ylabel='tpr')
 ax[1,0].legend(['no skill', 'logistic'], loc='lower right')
 
+# second category
 ax[1,1].plot(ns_fpr2, ns_tpr2, linestyle='--', label='No Skill')
 ax[1,1].plot(lr_fpr2, lr_tpr2, marker='.', label='Logistic')
 ax[1,1].set(title='roc: category #2', xlabel='fpr', ylabel='tpr')
 ax[1,1].legend(['no skill', 'logistic'], loc='lower right')
 
+# third category
 ax[2,0].plot(ns_fpr3, ns_tpr3, linestyle='--', label='No Skill')
 ax[2,0].plot(lr_fpr3, lr_tpr3, marker='.', label='Logistic')
 ax[2,0].set(title='roc: category #3', xlabel='fpr', ylabel='tpr')
