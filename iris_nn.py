@@ -1,6 +1,5 @@
 import numpy as np
 import sys
-import matplotlib.pyplot as plt
 
 import sklearn
 from sklearn.datasets import load_iris  # useful for testing using sklearn's iris dataset
@@ -28,9 +27,6 @@ def load_data():
     y = encoder.fit_transform(y.reshape(-1, 1))  # reshape as column vector
     x = pd.DataFrame(x, columns=iris_data.feature_names)
     y = pd.DataFrame(y, columns=encoder.categories_[0])
-
-    # Split the data for training and testing
-    # train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, shuffle=True)
     train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, random_state=42)
     return train_x, test_x, train_y, test_y
 
@@ -57,7 +53,6 @@ def train_and_evaluate(model, train_x, train_y, test_x, test_y, batch_size=5, ep
     history = model.fit(train_x, train_y, verbose=2, batch_size=batch_size, epochs=epochs, validation_data=(test_x, test_y))
     # contains the loss and accuracy for the training and validation data at each epoch
 
-    # Test the model
     results = model.evaluate(test_x, test_y)
     print()
     print('Final test set loss: {:4f}'.format(results[0]))
@@ -66,23 +61,15 @@ def train_and_evaluate(model, train_x, train_y, test_x, test_y, batch_size=5, ep
     return model, history
 
 def main():
-    print('py ', sys.version)
-    print('pd ', pd.__version__)
-    print('sklearn ', sklearn.__version__)
-    print('tf ', tf.__version__)
-
     train_x, test_x, train_y, test_y = load_data()
     nfeatures = train_x.shape[1]
     model, opt = build_model(nfeatures)
 
-    print('optimizer parameters ')
-    print(opt.get_config())
-    print('neural network model summary ')
-    print(model.summary())
-
     trained_model, history = train_and_evaluate(model, train_x, train_y, test_x, test_y)
-    # obtain probabilities
     pred_proba = trained_model.predict(test_x)
+
+    # Return necessary data for plotting
+    return test_y, pred_proba, history
 
 if __name__ == "__main__":
     main()
