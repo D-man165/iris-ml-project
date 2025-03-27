@@ -71,7 +71,6 @@ def train_and_evaluate(model, train_x, train_y, test_x, test_y, batch_size=5, ep
 
     return model, history
 
-# Main function
 def main():
     print('py ', sys.version)
     print('pd ', pd.__version__)
