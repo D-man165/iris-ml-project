@@ -1,7 +1,8 @@
 from iris_nn import *
 import matplotlib.pyplot as plt
+import pandas as pd
 
-test_y, pred_proba, history = main()
+df, test_x, test_y, pred_proba, history = main()
 
 # temporary test for 1st category
 temp_test_y1 = test_y.iloc[:,0]

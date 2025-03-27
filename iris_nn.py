@@ -19,16 +19,17 @@ from tensorflow.keras.optimizers import Adam
 import pandas as pd
 
 def load_data():
-    iris_data = load_iris()
-    x = iris_data.data
-    y = iris_data.target
+    df = pd.read_csv("/Users/diptimanbora/Library/CloudStorage/GoogleDrive-diptiman@arizona.edu/My Drive/iris.csv", header=0)
+    df = pd.get_dummies(df, columns=['Species', ]) # creates dummy columns for presence of the category
+    df['Species_Iris-setosa'] = df['Species_Iris-setosa'].replace({True: 1., False:0.})
+    df['Species_Iris-versicolor'] = df['Species_Iris-versicolor'].replace({True: 1., False: 0.})
+    df['Species_Iris-virginica'] = df['Species_Iris-virginica'].replace({True: 1.,False: 0.})
 
-    encoder = OneHotEncoder(sparse_output=False)
-    y = encoder.fit_transform(y.reshape(-1, 1))  # reshape as column vector
-    x = pd.DataFrame(x, columns=iris_data.feature_names)
-    y = pd.DataFrame(y, columns=encoder.categories_[0])
+    x = df.iloc[:,1:5] # feature matrix: contains the information on factors
+    y = df.iloc[:,5:8] # target matrix: contains the categories: dummy matrices
+
     train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, random_state=42)
-    return train_x, test_x, train_y, test_y
+    return df, train_x, test_x, train_y, test_y
 
 def build_model(nfeatures):
     model = Sequential()
@@ -61,7 +62,7 @@ def train_and_evaluate(model, train_x, train_y, test_x, test_y, batch_size=5, ep
     return model, history
 
 def main():
-    train_x, test_x, train_y, test_y = load_data()
+    df, train_x, test_x, train_y, test_y = load_data()
     nfeatures = train_x.shape[1]
     model, opt = build_model(nfeatures)
 
@@ -69,7 +70,7 @@ def main():
     pred_proba = trained_model.predict(test_x)
 
     # Return necessary data for plotting
-    return test_y, pred_proba, history
+    return df, test_x, test_y, pred_proba, history
 
 if __name__ == "__main__":
     main()
