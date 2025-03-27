@@ -17,7 +17,7 @@ from sklearn.metrics import auc
 
 import tensorflow as tf
 from tensorflow.keras.models import Sequential 
-from tensorflow.keras.layers import Dense 
+from tensorflow.keras.layers import Dense, Input
 from tensorflow.keras.optimizers import Adam
 
 import pandas as pd
@@ -26,61 +26,25 @@ print ('py ',sys.version)
 print ('pd ',pd.__version__)
 print ('sklearn ',sklearn.__version__)
 print ('tf ',tf.__version__)
-#exit()
 
-# read in panda from csv file
-df = pd.read_csv("/Users/diptimanbora/Library/CloudStorage/GoogleDrive-diptiman@arizona.edu/My Drive/iris.csv", header=0)
-
-print (df.columns)
-print (df.shape)
-print (df.iloc[0,:])
-
-df = pd.get_dummies(df, columns=['Species', ]) # creates dummy columns for presence of the category
-df['Species_Iris-setosa'] = df['Species_Iris-setosa'].replace({True: 1., False:0.})
-df['Species_Iris-versicolor'] = df['Species_Iris-versicolor'].replace({True: 1., False: 0.})
-df['Species_Iris-virginica'] = df['Species_Iris-virginica'].replace({True: 1.,False: 0.})
-print (df.dtypes)
-
-#x = df.values[:,1:5]
-#y = df.values[:,5:8]
-x = df.iloc[:,1:5] # feature matrix: contains the information on factors
-y = df.iloc[:,5:8] # target matrix: contains the categories: dummy matrices
-print (type(x))
-print (type(y))
-print (x.shape)
-print (y.shape)
-print (x.iloc[0,:])
-print (y.iloc[0,:])
-#print (x[0,:])
-#print (y[0,:])
-#exit()
-"""
 iris_data = load_iris()
-
-# Extract the feature matrix (x) and target vector (y)
 x = iris_data.data
 y = iris_data.target
 
-# Convert the target vector to a one-hot encoded format
 encoder = OneHotEncoder(sparse_output=False)
 y = encoder.fit_transform(y.reshape(-1, 1)) # reshape as column vector
-
-# Convert to DataFrame for consistency with the rest of your code
 x = pd.DataFrame(x, columns=iris_data.feature_names)
 y = pd.DataFrame(y, columns=encoder.categories_[0])
-"""
 
 # Split the data for training and testing
 #train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, shuffle=True)
 train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, random_state=42)
 nfeatures = train_x.shape[1]
-print (nfeatures)
-# test_y will be measured against predicted values from the model from test_x
 
 # Build the model
 
 model = Sequential()
-model.add(Dense(10, input_shape=(nfeatures,), activation='relu', name='input'))
+model.add(Input(shape=(nfeatures,), name='input'))
 model.add(Dense(10, activation='relu', name='middle1'))
 model.add(Dense(3, activation='softmax', name='output'))
 
