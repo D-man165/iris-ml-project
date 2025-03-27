@@ -19,7 +19,6 @@ from tensorflow.keras.optimizers import Adam
 
 import pandas as pd
 
-# Function to load and preprocess data
 def load_data():
     iris_data = load_iris()
     x = iris_data.data
@@ -33,10 +32,8 @@ def load_data():
     # Split the data for training and testing
     # train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, shuffle=True)
     train_x, test_x, train_y, test_y = train_test_split(x, y, test_size=0.30, random_state=42)
-    
     return train_x, test_x, train_y, test_y
 
-# Function to build the model
 def build_model(nfeatures):
     model = Sequential()
     model.add(Input(shape=(nfeatures,), name='input'))
@@ -51,10 +48,8 @@ def build_model(nfeatures):
     model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
     # Categorical Cross-Entropy then computes the loss based on how far 
     # off these probabilities are from the true distribution.
-
     return model, opt
 
-# Function to train and evaluate the model
 def train_and_evaluate(model, train_x, train_y, test_x, test_y, batch_size=5, epochs=100):
     # batch size is the number of samples processed before model is updated: feature of SGD
     # epoch is number of complete passes through the data set: repetitions of the dataset
@@ -68,7 +63,6 @@ def train_and_evaluate(model, train_x, train_y, test_x, test_y, batch_size=5, ep
     print('Final test set loss: {:4f}'.format(results[0]))
     print('Final test set accuracy: {:4f}'.format(results[1]))
     print(history.history.keys())
-
     return model, history
 
 def main():
@@ -79,20 +73,16 @@ def main():
 
     train_x, test_x, train_y, test_y = load_data()
     nfeatures = train_x.shape[1]
-
     model, opt = build_model(nfeatures)
 
     print('optimizer parameters ')
     print(opt.get_config())
-
     print('neural network model summary ')
     print(model.summary())
 
     trained_model, history = train_and_evaluate(model, train_x, train_y, test_x, test_y)
-
     # obtain probabilities
     pred_proba = trained_model.predict(test_x)
 
-# Ensure script runs when executed
 if __name__ == "__main__":
     main()
