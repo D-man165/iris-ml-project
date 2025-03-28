@@ -1,3 +1,6 @@
+import sys
+sys.path.append('/Users/diptimanbora/Desktop/GitHub/iris-ml-project')
+
 from iris_nn import *
 import matplotlib.pyplot as plt
 import pandas as pd
