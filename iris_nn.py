@@ -1,10 +1,9 @@
 import numpy as np
-import sys
+import pandas as pd
 
 import sklearn
 from sklearn.datasets import load_iris  # useful for testing using sklearn's iris dataset
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import OneHotEncoder
 
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import roc_auc_score
@@ -16,10 +15,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Input
 from tensorflow.keras.optimizers import Adam
 
-import pandas as pd
-
 def load_data():
-    df = pd.read_csv("/Users/diptimanbora/Library/CloudStorage/GoogleDrive-diptiman@arizona.edu/My Drive/iris.csv", header=0)
+    df = pd.read_csv("iris.csv", header=0)
     df = pd.get_dummies(df, columns=['Species', ]) # creates dummy columns for presence of the category
     df['Species_Iris-setosa'] = df['Species_Iris-setosa'].replace({True: 1., False:0.})
     df['Species_Iris-versicolor'] = df['Species_Iris-versicolor'].replace({True: 1., False: 0.})
