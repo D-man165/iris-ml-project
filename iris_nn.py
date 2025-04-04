@@ -16,7 +16,7 @@ from tensorflow.keras.layers import Dense, Input
 from tensorflow.keras.optimizers import Adam
 
 def load_data():
-    df = pd.read_csv("/Users/diptimanbora/Desktop/GitHub/iris-ml-project/iris.csv", header=0)
+    df = pd.read_csv("iris.csv", header=0)
     df = pd.get_dummies(df, columns=['Species', ]) # creates dummy columns for presence of the category
     df['Species_Iris-setosa'] = df['Species_Iris-setosa'].replace({True: 1., False:0.})
     df['Species_Iris-versicolor'] = df['Species_Iris-versicolor'].replace({True: 1., False: 0.})
