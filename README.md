@@ -9,7 +9,7 @@ This project includes file `iris_nn.py` for loading the local iris dataset as a 
 ### `iris_nn.py`:
 
 #### Functions:
-It consists of 3 functions `load_data()`, `build_model` and `train_evaluate()`.
+It consists of 3 functions `load_data()`, `build_model()` and `train_evaluate()`.
 `load_data()` creates a DataFrame and then dummy columns for each species having 1 or 0 for boolean values. This is called [One Hot Encoding](https://www.geeksforgeeks.org/ml-one-hot-encoding/). Using train_test_split() from Scikit-Learn, it then obtains the testing and training feature and target matrices.
 
 `build_model` creates a model using Sequential() from Keras with a input layer, a hidden layer consisting of 10 neurons with ReLU and an output layer with 3 neurons and Softmax. ReLU and Softmax are activation functions which introduce non-linear behavior for activations of neurons. Essentially activation functions decide the value of the activation for a neuron as a function of weights, biases and activations of the previous layer(which are then decided on the previous layer until the input). Softmax is generally used in output layer as it gives probability for each output which add up to 1. The function then selects Adam as its optimizer with a learning rate of 0.001. Visit the YouTube channel for an in-depth explanation [3Blue1Brown](https://www.youtube.com/@3blue1brown). The model is finally created here.
