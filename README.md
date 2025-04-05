@@ -34,5 +34,5 @@ If you simply want to see the neural network in action, simple run `iris_nn.py`.
 * Name: Diptiman Bora
 * Affiliation: BS in Physics and SDS, University of Arizona
 * Location: Tucson, US.
-* Current Role: Freshman at the University of Arizona and an undergraduate research assistance in UA.
+* Current Role: Freshman and an undergraduate research intern at the University of Arizona 
 * Check out my [LinkedIn Page](www.linkedin.com/in/diptiman-bora9724286).
