@@ -26,7 +26,7 @@ If you simply want to see the neural network in action, simple run `iris_nn.py`.
 ## So What?
 * This project is not the best way to implement a neural network. I would argue the best way is to implement a neural network from scratch, i.e., without using Keras, Scikit-Learn or other modules. However, I was required to implement this on a time-basis and hence chose the easier way out.
   
-* I learnt a ton from project, manipulating DataFrames, array, experimenting with different model configurations. And the plots were a ton of work too. I think adding the plots was a very smart move, as while experimenting on the plots I heightened my understanding of neural networks. In the future I aim to focus on basics, such as Linear Regression.
+* I learnt a ton from the project, manipulating DataFrames, array, experimenting with different model configurations. And the plots were a ton of work too. I think adding the plots was a very smart move, as while experimenting on the plots I heightened my understanding of neural networks. In the future I aim to focus on basics, such as Linear Regression.
 
 ## About The Author:
  Here is some information about me:
